@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <Authors>Takuya Takeuchi</Authors>
+    <Company />
+    <Product>Classification10</Product>
+    <Copyright>© Takuya Takeuchi. All Rights Reserved.</Copyright>
+    <Description>The exsample program for LibSvmDotNet</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LibSvmDotNet\LibSvmDotNet.csproj" />
+  </ItemGroup>
+
+</Project>
