@@ -17,7 +17,14 @@ namespace LibSvmDotNet
         /// Encapsulates a method that has a string parameter and does not return a value.
         /// </summary>
         /// <param name="message"></param>
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void PrintFunc(string message);
+
+        #endregion
+
+        #region Fields
+
+        private static GCHandle PrintFuncHandle;
 
         #endregion
 
@@ -79,7 +86,7 @@ namespace LibSvmDotNet
                 try
                 {
                     target = new double[problem.Length];
-                    var prob = (NativeMethods.svm_problem*) problem.NativePtr;
+                    var prob = (NativeMethods.svm_problem*)problem.NativePtr;
                     NativeMethods.svm_cross_validation(prob, &param, fold, target);
                 }
                 finally
@@ -187,7 +194,16 @@ namespace LibSvmDotNet
             if (printFunc == null)
                 printFunc = PrintNull;
 
-            NativeMethods.svm_set_print_string_function(printFunc);
+            var fp = new PrintFunc(printFunc);
+            var handle = GCHandle.Alloc(fp);
+            var ip = Marshal.GetFunctionPointerForDelegate(fp);
+
+            NativeMethods.svm_set_print_string_function(ip);
+
+            if (PrintFuncHandle.IsAllocated)
+                PrintFuncHandle.Free();
+
+            PrintFuncHandle = handle;
         }
 
         /// <summary>

@@ -76,7 +76,7 @@ namespace LibSvmDotNet.Interop
 
         [SuppressUnmanagedCodeSecurity]
         [DllImport(NativeLibrary, CallingConvention = CallingConvention)]
-        public static extern void svm_set_print_string_function([MarshalAs(UnmanagedType.FunctionPtr)]LibSvm.PrintFunc func);
+        public static extern void svm_set_print_string_function(IntPtr func);
 
         [SuppressUnmanagedCodeSecurity]
         [DllImport(CLibrary, EntryPoint = "memcpy", CallingConvention = CallingConvention)]
