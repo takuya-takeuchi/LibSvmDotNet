@@ -114,7 +114,7 @@ namespace LibSvmDotNet
         }
 
         /// <summary>
-        /// Gets the number of support vector for each class for a classification model.
+        /// Gets the array contains number of support vector for each class for a classification model.
         /// </summary>
         public int[] NumberOfSupportVector
         {
@@ -185,7 +185,7 @@ namespace LibSvmDotNet
         /// Loads an <see cref="Model"/> given the specified file.
         /// </summary>
         /// <param name="path">The LIBSVM format file name and path.</param>
-        /// <returns>This method returns a new <see cref="Problem"/> for the specified file.</returns>
+        /// <returns>This method returns a new <see cref="Model"/> for the specified file.</returns>
         /// <exception cref="ArgumentException">The specified path is null or whitespace.</exception>
         /// <exception cref="FileNotFoundException">The specified file is not found.</exception>
         /// <exception cref="FormatException">The specified file is invalid format.</exception>

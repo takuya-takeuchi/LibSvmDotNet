@@ -1,0 +1,509 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LibSvmDotNet</name>
+    </assembly>
+    <members>
+        <member name="T:LibSvmDotNet.DisposableObject">
+            <summary>
+            A class which has a pointer of native structure.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.DisposableObject.IsDisposed">
+            <summary>
+            Gets a value indicating whether this instance has been disposed.
+            </summary>
+            <returns>true if this instance has been disposed; otherwise, false.</returns>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.ThrowIfDisposed">
+            <summary>
+            If this object is disposed, then <see cref="T:System.ObjectDisposedException"/> is thrown.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.ThrowIfDisposed(System.String)">
+            <summary>
+            If this object is disposed, then <see cref="T:System.ObjectDisposedException"/> is thrown.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.DisposeManaged">
+            <summary>
+            Releases all managed resources.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.Dispose">
+            <summary>
+            Releases all resources used by this <see cref="T:LibSvmDotNet.DisposableObject"/>.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources used by this <see cref="T:LibSvmDotNet.DisposableObject"/>.
+            </summary>
+            <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
+        </member>
+        <member name="T:LibSvmDotNet.KernelType">
+            <summary>
+            The KernelType enumeration specifies the kernel type for Support Vector Machine.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Linear">
+            <summary>
+            Linear kernel.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Polynomial">
+            <summary>
+            Polynomial kernel.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.RBF">
+            <summary>
+            Radial Basis Function kernel.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Sigmoid">
+            <summary>
+            Sigmoid kernel.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Precomputed">
+            <summary>
+            Precomputed kernel.
+            </summary>
+        </member>
+        <member name="T:LibSvmDotNet.LibSvm">
+            <summary>
+            Provides functions of LIBSVM.
+            </summary>
+        </member>
+        <member name="T:LibSvmDotNet.LibSvm.PrintFunc">
+            <summary>
+            Encapsulates a method that has a string parameter and does not return a value.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.CheckParameter(LibSvmDotNet.Problem,LibSvmDotNet.Parameter)">
+            <summary>
+            Checks whether the parameters are within the feasible range of the problem.
+            </summary>
+            <param name="problem"><see cref="T:LibSvmDotNet.Problem"/>.</param>
+            <param name="parameter"><see cref="T:LibSvmDotNet.Parameter"/>.</param>
+            <returns>It returns null if the parameters are feasible, otherwise an error message is returned.</returns>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.CrossValidation(LibSvmDotNet.Problem,LibSvmDotNet.Parameter,System.Int32,System.Double[]@)">
+            <summary>
+            Conducts cross validation.
+            </summary>
+            <param name="problem"><see cref="T:LibSvmDotNet.Problem"/>.</param>
+            <param name="parameter"><see cref="T:LibSvmDotNet.Parameter"/>.</param>
+            <param name="fold">The number of division for samples.</param>
+            <param name="target">The predicted labels (of all prob's instances) in the validation process will be stored.</param>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.Predict(LibSvmDotNet.Model,LibSvmDotNet.NodeArray)">
+            <summary>
+            Does classification or regression on a test vector x given a model.
+            </summary>
+            <param name="model"><see cref="T:LibSvmDotNet.Model"/>.</param>
+            <param name="x">The test vector.</param>
+            <returns>
+            <para>For a classification model, the predicted class for x is returned.</para>
+            <para>For a regression model, the function value of x calculated using the model is returned. For an one-class model, +1 or -1 is returned.</para>
+            </returns>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.Predict(LibSvmDotNet.Model,LibSvmDotNet.NodeArray,System.Double[]@)">
+            <summary>
+            Does classification or regression on a test vector x given a model.
+            </summary>
+            <param name="model"><see cref="T:LibSvmDotNet.Model"/>.</param>
+            <param name="x">The test vector.</param>
+            <param name="probability">When this method returns, contains probability estimates if succeeded, or null if failed.</param>
+            <returns>
+            <para>For a classification model, the predicted class for x is returned.</para>
+            <para>For a regression model, the function value of x calculated using the model is returned. For an one-class model, +1 or -1 is returned.</para>
+            </returns>
+            <remarks>This methods returns valid probability when <see cref="P:LibSvmDotNet.Model.ProbabilityA"/> and <see cref="P:LibSvmDotNet.Model.ProbabilityB"/> are not null.</remarks>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.PredictValues(LibSvmDotNet.Model,LibSvmDotNet.NodeArray,System.Double[]@)">
+            <summary>
+            Gives decision values on a test vector x given a model, and return the predicted label(classification) or the function value(regression).
+            </summary>
+            <param name="model"><see cref="T:LibSvmDotNet.Model"/>.</param>
+            <param name="x">The test vector.</param>
+            <param name="decisionValues">When this method returns, contains decision values if succeeded, or null if failed.</param>
+            <returns>
+            <para>For a classification model, the predicted class for x and decision values.</para>
+            <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
+            </returns>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.SetPrintFunction(LibSvmDotNet.LibSvm.PrintFunc)">
+            <summary>
+            Specify output fpr LIBSVM.
+            </summary>
+            <param name="printFunc">The callback to receive the output and process.</param>
+            <remarks>If specify null, it suppress output from LIBSVM.</remarks>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.Train(LibSvmDotNet.Problem,LibSvmDotNet.Parameter)">
+            <summary>
+            Does constructs and returns an Support Vector Machine model according to the given training data and parameters.
+            </summary>
+            <param name="problem"><see cref="T:LibSvmDotNet.Problem"/>.</param>
+            <param name="parameter"><see cref="T:LibSvmDotNet.Parameter"/>.</param>
+            <returns>This method returns a new <see cref="T:LibSvmDotNet.Model"/>.</returns>
+        </member>
+        <member name="T:LibSvmDotNet.LibSvmException">
+            <summary>
+            The exception is general exception for LIBSVM. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvmException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:LibSvmDotNet.LibSvmException"/> class.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvmException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LibSvmDotNet.LibSvmException"/> class with a specified error message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvmException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LibSvmDotNet.LibSvmException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The name of the parameter that caused the current exception.</param>
+        </member>
+        <member name="T:LibSvmDotNet.Model">
+            <summary>
+            Represents an trained model.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.FreeSupportVector">
+            <summary>
+            Gets a value indicating whether this instance is created by <see cref="M:LibSvmDotNet.Model.Load(System.String)"/>.
+            </summary>
+            <returns>true if this instance is created by <see cref="M:LibSvmDotNet.Model.Load(System.String)"/>; otherwise, false.</returns>
+        </member>
+        <member name="P:LibSvmDotNet.Model.IsEstimableProbability">
+            <summary>
+            Indicates whether this model contains required information to do probability estimates.
+            </summary>
+            <returns>true if this model contains required information to do probability estimates; otherwise, false.</returns>
+        </member>
+        <member name="P:LibSvmDotNet.Model.L">
+            <summary>
+            Gets the number of support vector.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Label">
+            <summary>
+            Gets the array for label of each class for a classification model.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Classes">
+            <summary>
+            Gets the number of classes.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.NumberOfSupportVector">
+            <summary>
+            Gets the array contains number of support vector for each class for a classification model.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Parameter">
+            <summary>
+            Gets the parameter of this model.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.ProbabilityA">
+            <summary>
+            Gets the pairwise probability information.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.ProbabilityB">
+            <summary>
+            Gets the pairwise probability information.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Rho">
+            <summary>
+            Gets the constants in decision functions.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.SupportVector">
+            <summary>
+            Gets the support vector.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.SupportVectorCoefficients">
+            <summary>
+            Gets the coefficients for support vector in decision functions.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.SupportVectorIndices">
+            <summary>
+            Gets the array to indicate support vector in the training set
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.Model.Load(System.String)">
+            <summary>
+            Loads an <see cref="T:LibSvmDotNet.Model"/> given the specified file.
+            </summary>
+            <param name="path">The LIBSVM format file name and path.</param>
+            <returns>This method returns a new <see cref="T:LibSvmDotNet.Model"/> for the specified file.</returns>
+            <exception cref="T:System.ArgumentException">The specified path is null or whitespace.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The specified file is not found.</exception>
+            <exception cref="T:System.FormatException">The specified file is invalid format.</exception>
+        </member>
+        <member name="M:LibSvmDotNet.Model.Save(System.String,LibSvmDotNet.Model)">
+            <summary>
+            Saves this <see cref="T:LibSvmDotNet.Model"/> to the specified file.
+            </summary>
+            <param name="path">The file to write to.</param>
+            <param name="model">The model to write to the file.</param>
+            <exception cref="T:LibSvmDotNet.LibSvmException">Failed to save model to the specified file.</exception>
+            <exception cref="T:System.ObjectDisposedException">Cannot access a disposed object.</exception>
+        </member>
+        <member name="T:LibSvmDotNet.Node">
+            <summary>
+            Represents an element for vector data.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.Node.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LibSvmDotNet.Node"/> struct with the specified node data and index of node data.
+            </summary>
+            <param name="ptr">Pointer to an array of <see cref="T:LibSvmDotNet.Interop.NativeMethods.svm_node"/>.</param>
+            <param name="index">The zero-based index at which node is located.</param>
+        </member>
+        <member name="M:LibSvmDotNet.Node.#ctor(LibSvmDotNet.Interop.NativeMethods.svm_node*)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LibSvmDotNet.Node"/> struct with the specified node data.
+            </summary>
+            <param name="ptr">Pointer to an array of <see cref="T:LibSvmDotNet.Interop.NativeMethods.svm_node"/>.</param>
+        </member>
+        <member name="P:LibSvmDotNet.Node.Index">
+            <summary>
+            Gets or sets a value indicating the position of the element in vector.
+            </summary>
+            <returns>The one-based index representing the position of the element in vector.</returns>
+        </member>
+        <member name="P:LibSvmDotNet.Node.Value">
+            <summary>
+            Gets or sets a value of the element in vector.
+            </summary>
+            <returns>The value of the element in vector.</returns>
+        </member>
+        <member name="T:LibSvmDotNet.NodeArray">
+            <summary>
+            Represents an vector data.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArray.Length">
+            <summary>
+            Gets the total number of elements in all the dimensions of the <see cref="T:LibSvmDotNet.NodeArray"/>.
+            </summary>
+            <returns>The total number of elements in all the dimensions of the <see cref="T:LibSvmDotNet.NodeArray"/>; zero if there are no elements in the array.</returns>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArray.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index"></param>
+            <returns>The index of the element to get.</returns>
+        </member>
+        <member name="M:LibSvmDotNet.NodeArray.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:LibSvmDotNet.NodeArray.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="T:LibSvmDotNet.NodeArrayCollecion">
+            <summary>
+            Represents an collection of <see cref="T:LibSvmDotNet.NodeArray"/>.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArrayCollecion.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:LibSvmDotNet.NodeArrayCollecion"/>.
+            </summary>
+            <returns>The number of elements contained in the <see cref="T:LibSvmDotNet.NodeArrayCollecion"/>.</returns>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArrayCollecion.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index"></param>
+            <returns>The index of the element to get.</returns>
+        </member>
+        <member name="T:LibSvmDotNet.Parameter">
+            <summary>
+            Represents an parameter for Support Vector Machine.
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.Parameter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:LibSvmDotNet.Parameter"/> class.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.C">
+            <summary>
+            Gets or sets the cost parameter.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.CacheSize">
+            <summary>
+            Gets or sets the cache memory size in MB.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Coef0">
+            <summary>
+            Gets or sets the coef0 parameter in kernel function.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Degree">
+            <summary>
+            Gets or sets the degree parameter in kernel function.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Epsilon">
+            <summary>
+            Gets or sets the tolerance of termination criterion.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Gamma">
+            <summary>
+            Gets or sets the gamma parameter in kernel function.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.KernelType">
+            <summary>
+            Gets or sets the type of kernel function.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.LengthOfWeight">
+            <summary>
+            Gets or sets the number of elements in the array <see cref="P:LibSvmDotNet.Parameter.Weight"/> and <see cref="P:LibSvmDotNet.Parameter.WeightLabel"/>.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Nu">
+            <summary>
+            Gets or sets the nu parameter of SvmType.NuSVC, SvmType.OneClass, and SvmType.NuSVR.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.P">
+            <summary>
+            Gets or sets the epsilon in loss function of SvmType.EpsilonSVR.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Probability">
+            <summary>
+            Gets or sets indicating whether to train a SVC or SVR model for probability estimates.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Shrinking">
+            <summary>
+            Gets or sets indicating whether to use the shrinking heuristics.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.SvmType">
+            <summary>
+            Gets or sets type of Support Vector Machine.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Weight">
+            <summary>
+            Gets or sets the array of factors for penalty.
+            </summary>
+            <remarks>Each <code>Weight[i]</code> corresponds to <code>WeightLabel[i]</code>.</remarks>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.WeightLabel">
+            <summary>
+            Gets or sets the array of labels for group training data of the same class.
+            </summary>
+            <remarks>Each <code>Weight[i]</code> corresponds to <code>WeightLabel[i]</code>.</remarks>
+        </member>
+        <member name="T:LibSvmDotNet.Problem">
+            <summary>
+            Represents an problem for Support Vector Machine.
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Problem.Length">
+            <summary>
+            Gets the number of data contained in the <see cref="T:LibSvmDotNet.Problem"/>.
+            </summary>
+            <returns>The number of data contained in the <see cref="T:LibSvmDotNet.Problem"/>.</returns>
+            <exception cref="T:System.ObjectDisposedException">Cannot access a disposed object.</exception>
+        </member>
+        <member name="P:LibSvmDotNet.Problem.X">
+            <summary>
+            Gets the <see cref="T:LibSvmDotNet.NodeArrayCollecion"/>.
+            </summary>
+            <returns>An <see cref="T:LibSvmDotNet.NodeArrayCollecion"/> instance that problem owns.</returns>
+            <exception cref="T:System.ObjectDisposedException">Cannot access a disposed object.</exception>
+        </member>
+        <member name="P:LibSvmDotNet.Problem.Y">
+            <summary>
+            Gets an array of the labels for this problem.
+            </summary>
+            <returns>An array of the labels for this problem.</returns>
+            <exception cref="T:System.ObjectDisposedException">Cannot access a disposed object.</exception>
+        </member>
+        <member name="M:LibSvmDotNet.Problem.FromFile(System.String)">
+            <summary>
+            Creates a new <see cref="T:LibSvmDotNet.Problem"/> from the specified file.
+            </summary>
+            <param name="path">The LIBSVM format file name and path.</param>
+            <returns>This method returns a new <see cref="T:LibSvmDotNet.Problem"/> for the specified file.</returns>
+            <exception cref="T:System.ArgumentException">The specified path is null or whitespace.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The specified file is not found.</exception>
+            <exception cref="T:System.FormatException">The specified file is invalid format.</exception>
+        </member>
+        <member name="M:LibSvmDotNet.Problem.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:LibSvmDotNet.SvmType">
+            <summary>
+            The SvmType enumeration specifies the type of Support Vector Machine.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.CSVC">
+            <summary>
+            C-Support Vector Classification.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.NuSVC">
+            <summary>
+            nu-Support Vector Classification.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.OneClass">
+            <summary>
+            One-class Support Vector Machine.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.EpsilonSVR">
+            <summary>
+            epsilon-Support Vector Regression.
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.NuSVR">
+            <summary>
+            nu-Support Vector Regression.
+            </summary>
+        </member>
+    </members>
+</doc>
