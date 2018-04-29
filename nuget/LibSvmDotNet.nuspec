@@ -3,7 +3,7 @@
   <metadata>
     <id>LibSvmDotNet</id>
     <version>1.0.0</version>
-    <title>LibSvm.Net</title>
+    <title>LibSvmDotNet</title>
     <authors>Takuya Takeuchi</authors>
     <owners>Takuya Takeuchi</owners>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
