@@ -1,6 +1,7 @@
 # LibSvm.Net
  
-.NET wrapper for LIBSVB written in C#
+.NET wrapper for LIBSVM written in C#  
+LibSvm.Net works on Windows and Linux!!
 
 ## Usage
 

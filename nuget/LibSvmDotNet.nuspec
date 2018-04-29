@@ -2,17 +2,19 @@
 <package >
   <metadata>
     <id>LibSvmDotNet</id>
-    <version>1.0.0</version>
-    <title>LibSvm.Net</title>
+    <version>1.0.1</version>
+    <title>LibSvmDotNet</title>
     <authors>Takuya Takeuchi</authors>
+    <owners>Takuya Takeuchi</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/takuya-takeuchi/LibSvmDotNet</projectUrl>
-    <iconUrl>https://github.com/takuya-takeuchi/LibSvmDotNet/blob/master/nuget/svm.png</iconUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <description>.NET wrapper for LIBSVB written in C#</description>
-    <releaseNotes>Initial Release</releaseNotes>
-    <copyright>Copyright Takuya Takeuchi 2018</copyright>
+    <iconUrl>https://github.com/takuya-takeuchi/LibSvmDotNet/blob/master/nuget/svm128.png?raw=true</iconUrl>
+    <description>.NET wrapper for LIBSVM written in C#. Please download libsvm.dll from https://github.com/cjlin1/libsvm</description>
+    <releaseNotes></releaseNotes>
+    <copyright>© Takuya Takeuchi 2018</copyright>
     <tags>svm libsvm .net machinelearning</tags>
+    <serviceable>true</serviceable>
     <dependencies>
       <group targetFramework="net40" />
       <group targetFramework="net46" />
