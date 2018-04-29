@@ -269,6 +269,11 @@
             <exception cref="T:LibSvmDotNet.LibSvmException">Failed to save model to the specified file.</exception>
             <exception cref="T:System.ObjectDisposedException">Cannot access a disposed object.</exception>
         </member>
+        <member name="M:LibSvmDotNet.Model.DisposeUnmanaged">
+            <summary>
+            Releases all unmanaged resources.
+            </summary>
+        </member>
         <member name="T:LibSvmDotNet.Node">
             <summary>
             Represents an element for vector data.
