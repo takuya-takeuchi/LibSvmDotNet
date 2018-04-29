@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LibSvmDotNet</name>
+    </assembly>
+    <members>
+        <member name="T:LibSvmDotNet.DisposableObject">
+            <summary>
+            ネイティブ構造体のポインタを保持するクラスです。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.DisposableObject.IsDisposed">
+            <summary>
+            インスタンスが破棄されているかどうかを示す値を取得します。
+            </summary>
+            <returns>インスタンスが破棄されている場合は true。それ以外の場合は false。</returns>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.ThrowIfDisposed">
+            <summary>
+            オブジェクトが破棄されている場合、<see cref="T:System.ObjectDisposedException"/> がスローされます。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.ThrowIfDisposed(System.String)">
+            <summary>
+            オブジェクトが破棄されている場合、<see cref="T:System.ObjectDisposedException"/> がスローされます。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.DisposeManaged">
+            <summary>
+            マネージ リソースを解放します。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.DisposeUnmanaged">
+            <summary>
+            アンマネージ リソースを解放します。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.Dispose">
+            <summary>
+            この <see cref="T:LibSvmDotNet.DisposableObject"/> によって使用されている全てのリソースを解放します。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.DisposableObject.Dispose(System.Boolean)">
+            <summary>
+            この <see cref="T:LibSvmDotNet.DisposableObject"/> によって使用されている全てのリソースを解放します。
+            </summary>
+            <param name="disposing"><see cref="M:System.IDisposable.Dispose"/> メソッドが呼ばれたかどうかを示す値。</param>
+        </member>
+        <member name="T:LibSvmDotNet.KernelType">
+            <summary>
+            KernelType 列挙型はサポート ベクター マシンのカーネル タイプを指定します。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Linear">
+            <summary>
+            線形カーネル。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Polynomial">
+            <summary>
+            多項式カーネル。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.RBF">
+            <summary>
+            動径基底関数カーネル。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Sigmoid">
+            <summary>
+            シグモイド カーネル
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.KernelType.Precomputed">
+            <summary>
+            事前計算カーネル.
+            </summary>
+        </member>
+        <member name="T:LibSvmDotNet.LibSvm">
+            <summary>
+            LIBSVM の機能を提供します。
+            </summary>
+        </member>
+        <member name="T:LibSvmDotNet.LibSvm.PrintFunc">
+            <summary>
+            string パラメータを持ち、値を返されないメソッドをカプセル化します。
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.CheckParameter(LibSvmDotNet.Problem,LibSvmDotNet.Parameter)">
+            <summary>
+            パラメータが問題の許容領域にあるかどうかをチェックします。
+            </summary>
+            <param name="problem"><see cref="T:LibSvmDotNet.Problem"/>。</param>
+            <param name="parameter"><see cref="T:LibSvmDotNet.Parameter"/>。</param>
+            <returns>パラメータが実行可能である場合は null を返します。それ以外の場合はエラー メッセージを返します。</returns>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.CrossValidation(LibSvmDotNet.Problem,LibSvmDotNet.Parameter,System.Int32,System.Double[]@)">
+            <summary>
+            交差検証を行います。
+            </summary>
+            <param name="problem"><see cref="T:LibSvmDotNet.Problem"/>。</param>
+            <param name="parameter"><see cref="T:LibSvmDotNet.Parameter"/>。</param>
+            <param name="fold">サンプルを分割する数。</param>
+            <param name="target">検証プロセスにおける、予測されたラベル (全問題のインスタンスの) が格納されます。</param>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.Predict(LibSvmDotNet.Model,LibSvmDotNet.NodeArray)">
+            <summary>
+            あるモデルを与えられたテスト ベクトルに対して分類または回帰を行います。
+            </summary>
+            <param name="model"><see cref="T:LibSvmDotNet.Model"/>。</param>
+            <param name="x">テスト ベクトル。</param>
+            <returns>
+            <para>分類モデルでは、x に対する予測ラベルを返します。</para>
+            <para>回帰モデルでは、モデルを使用して計算された x の関数値を返します。 1 クラス モデルでは、+1 または -1 を返します。</para>
+            </returns>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.Predict(LibSvmDotNet.Model,LibSvmDotNet.NodeArray,System.Double[]@)">
+            <summary>
+            あるモデルを与えられたテスト ベクトルに対して分類または回帰を行います。
+            </summary>
+            <param name="model"><see cref="T:LibSvmDotNet.Model"/>。</param>
+            <param name="x">テスト ベクトル。</param>
+            <param name="probability">メソッドから戻るとき、成功すると確率推定を含め、 失敗すると null を返します。</param>
+            <returns>
+            <para>分類モデルでは、x に対する予測ラベルを返します。</para>
+            <para>回帰モデルでは、モデルを使用して計算された x の関数値を返します。 1 クラス モデルでは、+1 または -1 を返します。</para>
+            </returns>
+            <remarks>このメソッドは、<see cref="P:LibSvmDotNet.Model.ProbabilityA"/> と <see cref="P:LibSvmDotNet.Model.ProbabilityB"/> が null でないとき、正しい確率を返します。</remarks>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.PredictValues(LibSvmDotNet.Model,LibSvmDotNet.NodeArray,System.Double[]@)">
+            <summary>
+            あるモデルを与えられたテスト ベクトルに対する予測値を与え、予測ラベル (分類) または関数値 (回帰) を返します。
+            </summary>
+            <param name="model"><see cref="T:LibSvmDotNet.Model"/>。</param>
+            <param name="x">テスト ベクトル。</param>
+            <param name="probability">メソッドから戻るとき、成功すると予測値を含め、 失敗すると null を返します。</param>
+            <returns>
+            <para>分類モデルでは、x に対する予測クラスと予測値を返します。</para>
+            <para>回帰モデルでは、<code>decisionValues[0]</code> と戻り値は、モデルを使用して計算された x の関数値です。1 クラス モデルでは、<code>decisionValues[0]</code> は x の予測値であり、+1 または -1 を返します。</para>
+            </returns>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.SetPrintFunction(LibSvmDotNet.LibSvm.PrintFunc)">
+            <summary>
+            LIBSVM の出力を指定します。
+            </summary>
+            <param name="printFunc">出力を受け取り処理するコールバック。</param>
+            <remarks>null を指定すると、LIBSVM からの出力を抑制します。</remarks>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvm.Train(LibSvmDotNet.Problem,LibSvmDotNet.Parameter)">
+            <summary>
+            与えられた学習データとパラメータに対応するサポート ベクター マシンのモデルを生成し返します。
+            </summary>
+            <param name="problem"><see cref="T:LibSvmDotNet.Problem"/>。</param>
+            <param name="parameter"><see cref="T:LibSvmDotNet.Parameter"/>。</param>
+            <returns>このメソッドは新しい <see cref="T:LibSvmDotNet.Model"/> を返します。</returns>
+        </member>
+        <member name="T:LibSvmDotNet.LibSvmException">
+            <summary>
+            この例外は、LIBSVM の汎用的な例外です。このクラスは継承できません。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvmException.#ctor">
+            <summary>
+            <see cref="T:LibSvmDotNet.LibSvmException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvmException.#ctor(System.String)">
+            <summary>
+            エラー メッセージを指定して、<see cref="T:LibSvmDotNet.LibSvmException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="message">例外の原因を説明するエラー メッセージ。</param>
+        </member>
+        <member name="M:LibSvmDotNet.LibSvmException.#ctor(System.String,System.Exception)">
+            <summary>
+            エラー メッセージとこの例外の原因である内部例外への参照を使用して、<see cref="T:LibSvmDotNet.LibSvmException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="message">例外の原因を説明するエラー メッセージ。</param>
+            <param name="innerException">現在の例外の原因である例外。内部例外が指定されていない場合は、null 参照。</param>
+        </member>
+        <member name="T:LibSvmDotNet.Model">
+            <summary>
+            学習済みモデルを表現します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.FreeSupportVector">
+            <summary>
+            このインスタンスが <see cref="M:LibSvmDotNet.Model.Load(System.String)"/> によって生成されたかどうかを示す値を取得します。
+            </summary>
+            <returns>このインスタンスが <see cref="M:LibSvmDotNet.Model.Load(System.String)"/> によって生成された場合は true。それ以外の場合は false。</returns>
+        </member>
+        <member name="P:LibSvmDotNet.Model.IsEstimableProbability">
+            <summary>
+            このモデルが確率推定を行うために必要な情報を含んでいるかどうかを示す値を取得します。
+            </summary>
+            <returns>このモデルが確率推定を行うために必要な情報を含んでいる場合は true。それ以外の場合は false。</returns>
+        </member>
+        <member name="P:LibSvmDotNet.Model.L">
+            <summary>
+            サポート ベクターの数を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Label">
+            <summary>
+            分類モデルにおける、各クラスに属するラベルの配列を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Classes">
+            <summary>
+            クラスの数を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.NumberOfSupportVector">
+            <summary>
+            分類モデルにおける、各クラスに属するサポート ベクターの数を含む配列を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Parameter">
+            <summary>
+            このモデルのパラメータを取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.ProbabilityA">
+            <summary>
+            ペアの確率情報を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.ProbabilityB">
+            <summary>
+            ペアの確率情報を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.Rho">
+            <summary>
+            決定関数の定数を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.SupportVector">
+            <summary>
+            サポート ベクターを取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.SupportVectorCoefficients">
+            <summary>
+            決定関数におけるサポート ベクターの係数を取得します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Model.SupportVectorIndices">
+            <summary>
+            学習セットにおけるサポート ベクターを示す配列を取得します。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.Model.Load(System.String)">
+            <summary>
+            指定したファイルから <see cref="T:LibSvmDotNet.Model"/> モデルを読み込みます。
+            </summary>
+            <param name="path">LIBSVM フォーマットのファイル名とパス。</param>
+            <returns>このメソッドは指定したファイルに対する新しい <see cref="T:LibSvmDotNet.Model"/> を返します。</returns>
+            <exception cref="T:System.ArgumentException">指定したパスが null または空白文字です。</exception>
+            <exception cref="T:System.IO.FileNotFoundException">指定したファイルが存在しません。</exception>
+            <exception cref="T:System.FormatException">指定したファイルは不正なフォーマットです。</exception>
+        </member>
+        <member name="M:LibSvmDotNet.Model.Save(System.String,LibSvmDotNet.Model)">
+            <summary>
+            <see cref="T:LibSvmDotNet.Model"/> を指定したファイルに保存します。
+            </summary>
+            <param name="path">書き込み先のファイル。</param>
+            <param name="model">ファイルに書き込むモデル。</param>
+            <exception cref="T:LibSvmDotNet.LibSvmException">指定したファイルへモデルを保存するのに失敗しました。</exception>
+            <exception cref="T:System.ObjectDisposedException">破棄されたオブジェクトにアクセスできません。</exception>
+        </member>
+        <member name="M:LibSvmDotNet.Model.DisposeUnmanaged">
+          <summary>
+            アンマネージ リソースを解放します。
+          </summary>
+        </member>
+        <member name="T:LibSvmDotNet.Node">
+            <summary>
+            ベクトル データの要素を表現します。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.Node.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            ノード データとノード データのインデックスを指定して、<see cref="T:LibSvmDotNet.Node"/> 構造体の新しいインスタンスを初期化します。
+            </summary>
+            <param name="ptr"><see cref="T:LibSvmDotNet.Interop.NativeMethods.svm_node"/> の配列へのポインタ。</param>
+            <param name="index">ノードが位置する 0 を基準としたインデックス。</param>
+        </member>
+        <member name="M:LibSvmDotNet.Node.#ctor(LibSvmDotNet.Interop.NativeMethods.svm_node*)">
+            <summary>
+            ノード データを指定して、<see cref="T:LibSvmDotNet.Node"/> 構造体の新しいインスタンスを初期化します。
+            </summary>
+            <param name="ptr"><see cref="T:LibSvmDotNet.Interop.NativeMethods.svm_node"/> の配列へのポインタ。</param>
+        </member>
+        <member name="P:LibSvmDotNet.Node.Index">
+            <summary>
+            ベクトルにおける要素の位置を示す値を取得または設定します。
+            </summary>
+            <returns>ベクトルにおける要素の位置を表現する 1 基準のインデックス。</returns>
+        </member>
+        <member name="P:LibSvmDotNet.Node.Value">
+            <summary>
+            ベクトルにおける要素の値を取得または設定します。
+            </summary>
+            <returns>ベクトルにおける要素の値。</returns>
+        </member>
+        <member name="T:LibSvmDotNet.NodeArray">
+            <summary>
+            ベクトル データを表現します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArray.Length">
+            <summary>
+            <see cref="T:LibSvmDotNet.NodeArray"/> の全次元における要素の総数を取得します。
+            </summary>
+            <returns><see cref="T:LibSvmDotNet.NodeArray"/> の全次元における要素の総数。配列内に要素が存在しない場合は 0。</returns>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArray.Item(System.Int32)">
+            <summary>
+            指定したインデックスにある要素を取得します。
+            </summary>
+            <param name="index"></param>
+            <returns>取得する要素のインデックス。</returns>
+        </member>
+        <member name="M:LibSvmDotNet.NodeArray.GetEnumerator">
+            <summary>
+            コレクションを反復処理する列挙子を返します。
+            </summary>
+            <returns>コレクションの反復処理に使用できる <see cref="T:System.Collections.Generic.IEnumerator`1"/> 列挙子。</returns>
+        </member>
+        <member name="M:LibSvmDotNet.NodeArray.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            コレクションを反復処理する列挙子を返します。
+            </summary>
+            <returns>コレクションを反復処理するために使用できる <see cref="T:System.Collections.IEnumerator"/> オブジェクト。</returns>
+        </member>
+        <member name="T:LibSvmDotNet.NodeArrayCollecion">
+            <summary>
+            <see cref="T:LibSvmDotNet.NodeArray"/> のコレクションを表現します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArrayCollecion.Count">
+            <summary>
+            <see cref="T:LibSvmDotNet.NodeArrayCollecion"/> に含まれる要素の数を取得します。
+            </summary>
+            <returns><see cref="T:LibSvmDotNet.NodeArrayCollecion"/> に含まれる要素の数。</returns>
+        </member>
+        <member name="P:LibSvmDotNet.NodeArrayCollecion.Item(System.Int32)">
+            <summary>
+            指定したインデックスの要素を取得します。
+            </summary>
+            <param name="index"></param>
+            <returns>取得する要素のインデックス。</returns>
+        </member>
+        <member name="T:LibSvmDotNet.Parameter">
+            <summary>
+            サポート ベクター マシンのパラメータを表現します。
+            </summary>
+        </member>
+        <member name="M:LibSvmDotNet.Parameter.#ctor">
+            <summary>
+            <see cref="T:LibSvmDotNet.Parameter"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.C">
+            <summary>
+            cost パラメータを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.CacheSize">
+            <summary>
+            キャッシュ メモリー サイズを MB 単位で取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Coef0">
+            <summary>
+            coef0 パラメータを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Degree">
+            <summary>
+            次数パラメータを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Epsilon">
+            <summary>
+            停止基準の許容誤差を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Gamma">
+            <summary>
+            カーネル関数の gamma パラメータを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.KernelType">
+            <summary>
+            カーネル関数の種別を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.LengthOfWeight">
+            <summary>
+            配列 <see cref="P:LibSvmDotNet.Parameter.Weight"/> と <see cref="P:LibSvmDotNet.Parameter.WeightLabel"/> の要素の数を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Nu">
+            <summary>
+            SvmType.NuSVC、SvmType.OneClass、SvmType.NuSVRnu の nu (回帰精度) パラメータを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.P">
+            <summary>
+            SvmType.EpsilonSVR の損失関数におけるεを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Probability">
+            <summary>
+            サポート ベクター分類またはサポート ベクター回帰モデルを確率推定に関して学習するかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Shrinking">
+            <summary>
+            収縮ヒューリスティックを使用するかどうかを示す値を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.SvmType">
+            <summary>
+            サポート ベクター マシンの種別を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.Weight">
+            <summary>
+            ペナルティに対する因数の配列を取得または設定します。
+            </summary>
+            <remarks>各 <code>Weight[i]</code> は <code>WeightLabel[i]</code> に対応します。</remarks>
+        </member>
+        <member name="P:LibSvmDotNet.Parameter.WeightLabel">
+            <summary>
+            同一クラスに属する学習データグループに対するラベルの配列を取得または設定します。
+            </summary>
+            <remarks>各 <code>Weight[i]</code> は <code>WeightLabel[i]</code> に対応します。</remarks>
+        </member>
+        <member name="T:LibSvmDotNet.Problem">
+            <summary>
+            サポート ベクター マシンの問題を表現します。
+            </summary>
+        </member>
+        <member name="P:LibSvmDotNet.Problem.Length">
+            <summary>
+            <see cref="T:LibSvmDotNet.Problem"/> に含まれているデータの数を取得します。
+            </summary>
+            <returns><see cref="T:LibSvmDotNet.Problem"/> に含まれているデータの数。</returns>
+            <exception cref="T:System.ObjectDisposedException">破棄されたオブジェクトにアクセスできません。</exception>
+        </member>
+        <member name="P:LibSvmDotNet.Problem.X">
+            <summary>
+            <see cref="T:LibSvmDotNet.NodeArrayCollecion"/> を取得します。
+            </summary>
+            <returns>問題が保有する <see cref="T:LibSvmDotNet.NodeArrayCollecion"/> インスタンス。</returns>
+            <exception cref="T:System.ObjectDisposedException">破棄されたオブジェクトにアクセスできません。</exception>
+        </member>
+        <member name="P:LibSvmDotNet.Problem.Y">
+            <summary>
+            この問題に対するラベルの配列を取得します。
+            </summary>
+            <returns>この問題に対するラベルの配列。</returns>
+            <exception cref="T:System.ObjectDisposedException">破棄されたオブジェクトにアクセスできません。</exception>
+        </member>
+        <member name="M:LibSvmDotNet.Problem.FromFile(System.String)">
+            <summary>
+            指定したファイルから新しい <see cref="T:LibSvmDotNet.Problem"/> を生成します。
+            </summary>
+            <param name="path">LIBSVM フォーマットのファイル名とパス。</param>
+            <returns>このメソッドは指定したファイルに対する新しい <see cref="T:LibSvmDotNet.Problem"/> を返します。</returns>
+            <exception cref="T:System.ArgumentException">指定したパスが null または空白文字です。</exception>
+            <exception cref="T:System.IO.FileNotFoundException">指定したファイルが存在しません。</exception>
+            <exception cref="T:System.FormatException">指定したファイルは不正なフォーマットです。</exception>
+        </member>
+        <member name="M:LibSvmDotNet.Problem.DisposeUnmanaged">
+            <summary>
+            アンマネージ リソースを解放します。
+            </summary>
+        </member>
+        <member name="T:LibSvmDotNet.SvmType">
+            <summary>
+            SvmType 列挙型はサポート ベクター マシンの種別を指定します。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.CSVC">
+            <summary>
+            C サポート ベクター 分類。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.NuSVC">
+            <summary>
+            nu サポート ベクター 分類。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.OneClass">
+            <summary>
+            1 クラス サポート ベクター マシン。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.EpsilonSVR">
+            <summary>
+            εサポート ベクター 回帰。
+            </summary>
+        </member>
+        <member name="F:LibSvmDotNet.SvmType.NuSVR">
+            <summary>
+            nu サポート ベクター 回帰。
+            </summary>
+        </member>
+    </members>
+</doc>

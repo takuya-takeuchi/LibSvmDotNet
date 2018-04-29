@@ -54,6 +54,7 @@ namespace LibSvmDotNet
         /// Gets the number of data contained in the <see cref="Problem"/>.
         /// </summary>
         /// <returns>The number of data contained in the <see cref="Problem"/>.</returns>
+        /// <exception cref="ObjectDisposedException">Cannot access a disposed object.</exception>
         public int Length
         {
             get
@@ -84,7 +85,7 @@ namespace LibSvmDotNet
         /// <summary>
         /// Gets an array of the labels for this problem.
         /// </summary>
-        /// <returns>An array of the labels for this problem</returns>
+        /// <returns>An array of the labels for this problem.</returns>
         /// <exception cref="ObjectDisposedException">Cannot access a disposed object.</exception>
         public double[] Y
         {
@@ -151,6 +152,9 @@ namespace LibSvmDotNet
 
         #region Overrides
 
+        /// <summary>
+        /// Releases all unmanaged resources.
+        /// </summary>
         protected override void DisposeUnmanaged()
         {
             base.DisposeUnmanaged();

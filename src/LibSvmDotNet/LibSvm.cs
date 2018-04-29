@@ -103,7 +103,7 @@ namespace LibSvmDotNet
         /// <param name="x">The test vector.</param>
         /// <returns>
         /// <para>For a classification model, the predicted class for x is returned.</para>
-        /// <para>For a regression model, the function value of x calculated using the model is returned.For an one-class model, +1 or -1 is returned.</para>
+        /// <para>For a regression model, the function value of x calculated using the model is returned. For an one-class model, +1 or -1 is returned.</para>
         /// </returns>
         public static double Predict(Model model, NodeArray x)
         {
@@ -127,9 +127,9 @@ namespace LibSvmDotNet
         /// <param name="probability">When this method returns, contains probability estimates if succeeded, or null if failed.</param>
         /// <returns>
         /// <para>For a classification model, the predicted class for x is returned.</para>
-        /// <para>For a regression model, the function value of x calculated using the model is returned.For an one-class model, +1 or -1 is returned.</para>
+        /// <para>For a regression model, the function value of x calculated using the model is returned. For an one-class model, +1 or -1 is returned.</para>
         /// </returns>
-        /// <remarks>This methods returns valid probability when <see cref="Model.ProbabilityA"/> and <see cref="Model.ProbabilityB"/> do not null.</remarks>
+        /// <remarks>This methods returns valid probability when <see cref="Model.ProbabilityA"/> and <see cref="Model.ProbabilityB"/> are not null.</remarks>
         public static double Predict(Model model, NodeArray x, out double[] probability)
         {
             probability = null;
@@ -157,7 +157,6 @@ namespace LibSvmDotNet
         /// <para>For a classification model, the predicted class for x and decision values.</para>
         /// <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
         /// </returns>
-        /// <remarks>This methods returns valid probability when <see cref="Model.ProbabilityA"/> and <see cref="Model.ProbabilityB"/> do not null.</remarks>
         public static double PredictValues(Model model, NodeArray x, out double[] decisionValues)
         {
             decisionValues = null;
