@@ -3,6 +3,8 @@
 .NET wrapper for LIBSVM written in C#  
 LibSvm.Net works on Windows and Linux!!
 
+[![NuGet version](https://badge.fury.io/nu/LibSvmDotNet.svg)](https://badge.fury.io/nu/LibSvmDotNet)
+
 ## Usage
 
 Please refer [wiki](https://github.com/takuya-takeuchi/LibSvmDotNet/wiki)
