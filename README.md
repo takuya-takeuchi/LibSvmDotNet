@@ -1,4 +1,4 @@
-# LibSvmDotNet
+# LibSvm.Net
  
 .NET wrapper for LIBSVB written in C#
 
