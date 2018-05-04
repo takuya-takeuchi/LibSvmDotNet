@@ -280,13 +280,36 @@ namespace LibSvmDotNet
 
             if (ret.nr_weight > 0)
             {
-                ret.weight_label = (int*)NativeMethods.malloc(sizeof(int), ret.nr_weight);
-                fixed (int* p = &parameter.WeightLabel[0])
-                    NativeMethods.memcpy(ret.weight_label, p, ret.nr_weight * sizeof(int));
+                var len1 = parameter.WeightLabel.Length;
+                var len2 = parameter.Weight.Length;
+                if(len1 != ret.nr_weight || len2 != ret.nr_weight)
+                    throw new LibSvmException("Parameter.WeightLabel.Length does not match Parameter.Weight.Length");
+            }
 
-                ret.weight = (double*)NativeMethods.malloc(sizeof(double), ret.nr_weight);
-                fixed (double* p = &parameter.Weight[0])
-                    NativeMethods.memcpy(ret.weight, p, ret.nr_weight * sizeof(double));
+            var failAlloc = false;
+
+            try
+            {
+                if (ret.nr_weight > 0)
+                {
+                    ret.weight_label = (int*)NativeMethods.malloc(sizeof(int), ret.nr_weight);
+                    fixed (int* p = &parameter.WeightLabel[0])
+                        NativeMethods.memcpy(ret.weight_label, p, ret.nr_weight * sizeof(int));
+
+                    ret.weight = (double*)NativeMethods.malloc(sizeof(double), ret.nr_weight);
+                    fixed (double* p = &parameter.Weight[0])
+                        NativeMethods.memcpy(ret.weight, p, ret.nr_weight * sizeof(double));
+                }
+
+                failAlloc = true;
+            }
+            finally
+            {
+                if (!failAlloc)
+                {
+                    NativeMethods.free((IntPtr)ret.weight_label);
+                    NativeMethods.free((IntPtr)ret.weight);
+                }
             }
 
             return ret;

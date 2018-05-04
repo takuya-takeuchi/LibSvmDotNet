@@ -88,7 +88,8 @@ namespace LibSvmDotNet.Interop
 
         public static void free(IntPtr dest)
         {
-            Marshal.FreeCoTaskMem(dest);
+            if (dest != IntPtr.Zero)
+                Marshal.FreeCoTaskMem(dest);
         }
 
         public static IntPtr malloc(int size, int length)
@@ -143,7 +144,7 @@ namespace LibSvmDotNet.Interop
 
             [FieldOffset(176)]
             public int free_sv;    /* 1 if svm_model is created by svm_load_model*/
-            　　　　　　　　　　　 /* 0 if svm_model is created by svm_train */
+                                   /* 0 if svm_model is created by svm_train */
 
             #endregion
 
