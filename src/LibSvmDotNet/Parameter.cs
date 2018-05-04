@@ -175,7 +175,7 @@ namespace LibSvmDotNet
         }
 
         /// <summary>
-        /// Gets or sets the array of factors for penalty.
+        /// Gets or sets the array of factors to change penalty for some class.
         /// </summary>
         /// <remarks>Each <code>Weight[i]</code> corresponds to <code>WeightLabel[i]</code>.</remarks>
         public double[] Weight
@@ -185,7 +185,7 @@ namespace LibSvmDotNet
         }
 
         /// <summary>
-        /// Gets or sets the array of labels for group training data of the same class.
+        /// Gets or sets the array of labels to change penalty for some class.
         /// </summary>
         /// <remarks>Each <code>Weight[i]</code> corresponds to <code>WeightLabel[i]</code>.</remarks>
         public int[] WeightLabel

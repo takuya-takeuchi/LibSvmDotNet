@@ -86,21 +86,15 @@ namespace LibSvmDotNet.Interop
         [DllImport(CLibrary, EntryPoint = "memcpy", CallingConvention = CallingConvention)]
         public static extern IntPtr memcpy(double* dest, double* src, int count);
 
-        //[SuppressUnmanagedCodeSecurity]
-        //[DllImport(CLibrary, CallingConvention = CallingConvention)]
-        //public static extern void free(IntPtr dest);
-
-        //[SuppressUnmanagedCodeSecurity]
-        //[DllImport(CLibrary, CallingConvention = CallingConvention)]
-        //public static extern IntPtr malloc(int size, int length);
         public static void free(IntPtr dest)
         {
-            Marshal.FreeHGlobal(dest);
+            if (dest != IntPtr.Zero)
+                Marshal.FreeCoTaskMem(dest);
         }
 
         public static IntPtr malloc(int size, int length)
         {
-            return Marshal.AllocHGlobal(size * length);
+            return Marshal.AllocCoTaskMem(size * length);
         }
 
         #region svm_model
@@ -150,7 +144,7 @@ namespace LibSvmDotNet.Interop
 
             [FieldOffset(176)]
             public int free_sv;    /* 1 if svm_model is created by svm_load_model*/
-            　　　　　　　　　　　 /* 0 if svm_model is created by svm_train */
+                                   /* 0 if svm_model is created by svm_train */
 
             #endregion
 

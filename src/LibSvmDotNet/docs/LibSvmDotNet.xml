@@ -85,7 +85,7 @@
             <summary>
             Encapsulates a method that has a string parameter and does not return a value.
             </summary>
-            <param name="message"></param>
+            <param name="message">The message given from LIBSVM.</param>
         </member>
         <member name="M:LibSvmDotNet.LibSvm.CheckParameter(LibSvmDotNet.Problem,LibSvmDotNet.Parameter)">
             <summary>
@@ -137,7 +137,8 @@
             <param name="decisionValues">When this method returns, contains decision values if succeeded, or null if failed.</param>
             <returns>
             <para>For a classification model, the predicted class for x and decision values.</para>
-            <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
+            <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. </para>
+            <para>For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
             </returns>
         </member>
         <member name="M:LibSvmDotNet.LibSvm.SetPrintFunction(LibSvmDotNet.LibSvm.PrintFunc)">
@@ -319,8 +320,8 @@
             <summary>
             Gets the element at the specified index.
             </summary>
-            <param name="index"></param>
-            <returns>The index of the element to get.</returns>
+            <param name="index">The index of the element to get.</param>
+            <returns>The element at the specified index.</returns>
         </member>
         <member name="M:LibSvmDotNet.NodeArray.GetEnumerator">
             <summary>
@@ -349,8 +350,8 @@
             <summary>
             Gets the element at the specified index.
             </summary>
-            <param name="index"></param>
-            <returns>The index of the element to get.</returns>
+            <param name="index">The index of the element to get.</param>
+            <returns>The element at the specified index.</returns>
         </member>
         <member name="T:LibSvmDotNet.Parameter">
             <summary>
@@ -429,13 +430,13 @@
         </member>
         <member name="P:LibSvmDotNet.Parameter.Weight">
             <summary>
-            Gets or sets the array of factors for penalty.
+            Gets or sets the array of factors to change penalty for some class.
             </summary>
             <remarks>Each <code>Weight[i]</code> corresponds to <code>WeightLabel[i]</code>.</remarks>
         </member>
         <member name="P:LibSvmDotNet.Parameter.WeightLabel">
             <summary>
-            Gets or sets the array of labels for group training data of the same class.
+            Gets or sets the array of labels to change penalty for some class.
             </summary>
             <remarks>Each <code>Weight[i]</code> corresponds to <code>WeightLabel[i]</code>.</remarks>
         </member>

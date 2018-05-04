@@ -27,23 +27,44 @@ namespace LibSvmDotNet
             var collection = x.ToArray();
             var lengthArray = collection.Select(nodes => nodes.Length).ToArray();
 
-            // Create svm_node**
-            var count = collection.Length;
-            var index = 0;
-            var ptr = (NativeMethods.svm_node**)Marshal.AllocCoTaskMem(sizeof(NativeMethods.svm_node*) * count);
-            foreach (var array in collection)
-                ptr[index++] = array.ToNative();
+            var failAlloc = false;
+            var tmpNativePtr = (NativeMethods.svm_node**)0;
+            var tmpProb = (NativeMethods.svm_problem*)0;
 
-            // Create svm_problem instance
-            var prob = (NativeMethods.svm_problem*)Marshal.AllocCoTaskMem(sizeof(NativeMethods.svm_problem));
-            prob->l = y.Length;
-            prob->x = ptr;
-            prob->y = (double*)Marshal.AllocCoTaskMem(sizeof(double) * prob->l);
-            Marshal.Copy(y, 0, (IntPtr)prob->y, prob->l);
+            try
+            {
+                // Create svm_node**
+                var count = collection.Length;
+                var index = 0;
+                tmpNativePtr = (NativeMethods.svm_node**)NativeMethods.malloc(sizeof(NativeMethods.svm_node*), count);
+                foreach (var array in collection)
+                    tmpNativePtr[index++] = array.ToNative();
 
-            this.NativePtr = (IntPtr)prob;
-            this._Y = y;
-            this._X = new NodeArrayCollecion(ptr, lengthArray);
+                // Create svm_problem instance
+                tmpProb = (NativeMethods.svm_problem*)NativeMethods.malloc(sizeof(NativeMethods.svm_problem), 1);
+                tmpProb->l = y.Length;
+                tmpProb->x = tmpNativePtr;
+                tmpProb->y = (double*)NativeMethods.malloc(sizeof(double) * tmpProb->l, 1);
+                Marshal.Copy(y, 0, (IntPtr)tmpProb->y, tmpProb->l);
+
+                this.NativePtr = (IntPtr)tmpProb;
+                this._Y = y;
+                this._X = new NodeArrayCollecion(tmpNativePtr, lengthArray);
+
+                failAlloc = true;
+            }
+            finally
+            {
+                if (!failAlloc)
+                {
+                    NativeMethods.free((IntPtr)tmpProb->y);
+                    NativeMethods.free((IntPtr)tmpProb);
+                    for (var index = 0; index < collection.Length; index++)
+                        NativeMethods.free((IntPtr)tmpNativePtr[index++]);
+
+                    NativeMethods.free((IntPtr)tmpNativePtr);
+                }
+            }
         }
 
         #endregion
@@ -164,10 +185,10 @@ namespace LibSvmDotNet
                 var problem = (NativeMethods.svm_problem*)this.NativePtr;
                 var len = problem->l;
                 for (var i = 0; i < len; i++)
-                    Marshal.FreeCoTaskMem((IntPtr)problem->x[i]);
+                    NativeMethods.free((IntPtr)problem->x[i]);
 
-                Marshal.FreeCoTaskMem((IntPtr)problem->x);
-                Marshal.FreeCoTaskMem((IntPtr)problem->y);
+                NativeMethods.free((IntPtr)problem->x);
+                NativeMethods.free((IntPtr)problem->y);
             }
         }
 
