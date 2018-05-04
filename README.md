@@ -18,3 +18,11 @@ Please refer [wiki](https://github.com/takuya-takeuchi/LibSvmDotNet/wiki)
 > **Author:** Chih-Chung Chang and Chih-Jen Lin
 > 
 > **Principal Use:** A toolkit for support vector machine in C++. Main goal of LibSvm.Net is what wraps LIBSVM by C#.
+
+#### [Microsoft.Extensions.CommandLineUtils](https://www.nuget.org/packages/Microsoft.Extensions.CommandLineUtils/)
+
+> **License:** Microsoft .NET Library-JS License
+>
+> **Author:** Microsoft
+> 
+> **Principal Use:** Command-line parsing API for example programs.
