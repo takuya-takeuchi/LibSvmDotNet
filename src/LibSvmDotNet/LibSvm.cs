@@ -16,7 +16,7 @@ namespace LibSvmDotNet
         /// <summary>
         /// Encapsulates a method that has a string parameter and does not return a value.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The message given from LIBSVM.</param>
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void PrintFunc(string message);
 
@@ -155,7 +155,8 @@ namespace LibSvmDotNet
         /// <param name="decisionValues">When this method returns, contains decision values if succeeded, or null if failed.</param>
         /// <returns>
         /// <para>For a classification model, the predicted class for x and decision values.</para>
-        /// <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
+        /// <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. </para>
+        /// <para>For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
         /// </returns>
         public static double PredictValues(Model model, NodeArray x, out double[] decisionValues)
         {

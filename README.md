@@ -17,4 +17,4 @@ Please refer [wiki](https://github.com/takuya-takeuchi/LibSvmDotNet/wiki)
 >
 > **Author:** Chih-Chung Chang and Chih-Jen Lin
 > 
-> **Principal Use:** A toolkit for support vector machine in C++. Main goal of LibSvm.Net is what wraps dlib by C#.
+> **Principal Use:** A toolkit for support vector machine in C++. Main goal of LibSvm.Net is what wraps LIBSVM by C#.
