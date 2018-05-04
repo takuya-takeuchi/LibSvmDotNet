@@ -47,7 +47,18 @@ namespace LibSvmDotNet
 
             unsafe
             {
-                var param = parameter.ToNative();
+                var param = new NativeMethods.svm_parameter();
+
+                try
+                {
+                    // This method throw exception when there is some errors.
+                    // This error check is not official's.
+                    param = parameter.ToNative();
+                }
+                catch (LibSvmException lle)
+                {
+                    return lle.Message;
+                }
 
                 try
                 {
@@ -280,6 +291,11 @@ namespace LibSvmDotNet
 
             if (ret.nr_weight > 0)
             {
+                if (parameter.WeightLabel == null)
+                    throw new LibSvmException("Parameter.WeightLabel is null although Parameter.LengthOfWeight is over 0.");
+                if (parameter.Weight == null)
+                    throw new LibSvmException("Parameter.Weight is null although Parameter.LengthOfWeight is over 0.");
+
                 var len1 = parameter.WeightLabel.Length;
                 var len2 = parameter.Weight.Length;
                 if(len1 != ret.nr_weight || len2 != ret.nr_weight)
