@@ -295,7 +295,7 @@ namespace LibSvmDotNet
         internal static unsafe NativeMethods.svm_node* ToNative(this Node[] node)
         {
             var len = node.Length;
-            var ptr = (NativeMethods.svm_node*)Marshal.AllocCoTaskMem(sizeof(NativeMethods.svm_node) * (node.Length + 1));
+            var ptr = (NativeMethods.svm_node*)NativeMethods.malloc(sizeof(NativeMethods.svm_node), (node.Length + 1));
             fixed (Node* pX = &node[0])
             {
                 for (var j = 0; j < len; j++)

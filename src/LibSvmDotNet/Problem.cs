@@ -30,15 +30,15 @@ namespace LibSvmDotNet
             // Create svm_node**
             var count = collection.Length;
             var index = 0;
-            var ptr = (NativeMethods.svm_node**)Marshal.AllocCoTaskMem(sizeof(NativeMethods.svm_node*) * count);
+            var ptr = (NativeMethods.svm_node**)NativeMethods.malloc(sizeof(NativeMethods.svm_node*), count);
             foreach (var array in collection)
                 ptr[index++] = array.ToNative();
 
             // Create svm_problem instance
-            var prob = (NativeMethods.svm_problem*)Marshal.AllocCoTaskMem(sizeof(NativeMethods.svm_problem));
+            var prob = (NativeMethods.svm_problem*)NativeMethods.malloc(sizeof(NativeMethods.svm_problem), 1);
             prob->l = y.Length;
             prob->x = ptr;
-            prob->y = (double*)Marshal.AllocCoTaskMem(sizeof(double) * prob->l);
+            prob->y = (double*)NativeMethods.malloc(sizeof(double) * prob->l, 1);
             Marshal.Copy(y, 0, (IntPtr)prob->y, prob->l);
 
             this.NativePtr = (IntPtr)prob;
@@ -164,10 +164,10 @@ namespace LibSvmDotNet
                 var problem = (NativeMethods.svm_problem*)this.NativePtr;
                 var len = problem->l;
                 for (var i = 0; i < len; i++)
-                    Marshal.FreeCoTaskMem((IntPtr)problem->x[i]);
+                    NativeMethods.free((IntPtr)problem->x[i]);
 
-                Marshal.FreeCoTaskMem((IntPtr)problem->x);
-                Marshal.FreeCoTaskMem((IntPtr)problem->y);
+                NativeMethods.free((IntPtr)problem->x);
+                NativeMethods.free((IntPtr)problem->y);
             }
         }
 
