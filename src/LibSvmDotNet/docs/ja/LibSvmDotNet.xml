@@ -138,7 +138,7 @@
             <returns>
             <para>分類モデルでは、x に対する予測クラスと決定値を返します。</para>
             <para>回帰モデルでは、<code>decisionValues[0]</code> と戻り値は、モデルを使用して計算された x の関数値です。</para>
-            <para>1 クラス モデルでは、<code>decisionValues[0]</code> は x の予測値であり、+1 または -1 を返します。</para>
+            <para>1 クラス モデルでは、<code>decisionValues[0]</code> は x の決定値であり、+1 または -1 を返します。</para>
             </returns>
         </member>
         <member name="M:LibSvmDotNet.LibSvm.SetPrintFunction(LibSvmDotNet.LibSvm.PrintFunc)">
@@ -320,8 +320,8 @@
             <summary>
             指定したインデックスにある要素を取得します。
             </summary>
-            <param name="index"></param>
-            <returns>取得する要素のインデックス。</returns>
+            <param name="index">取得する要素のインデックス。</param>
+            <returns>指定したインデックス位置にある要素。</returns>
         </member>
         <member name="M:LibSvmDotNet.NodeArray.GetEnumerator">
             <summary>
@@ -350,8 +350,8 @@
             <summary>
             指定したインデックスの要素を取得します。
             </summary>
-            <param name="index"></param>
-            <returns>取得する要素のインデックス。</returns>
+            <param name="index">取得する要素のインデックス。</param>
+            <returns>指定したインデックス位置にある要素。</returns>
         </member>
         <member name="T:LibSvmDotNet.Parameter">
             <summary>

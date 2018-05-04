@@ -42,8 +42,8 @@ namespace LibSvmDotNet
         /// <summary>
         /// Gets the element at the specified index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns>The index of the element to get.</returns>
+        /// <param name="index">The index of the element to get.</param>
+        /// <returns>The element at the specified index.</returns>
         public NodeArray this[int index]
         {
             get
