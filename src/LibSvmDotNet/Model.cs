@@ -54,21 +54,7 @@ namespace LibSvmDotNet
         }
 
         #endregion
-
-        private static unsafe double[] Copy(double* src, int len)
-        {
-            var array = new double[len];
-            Marshal.Copy((IntPtr)src, array, 0, len);
-            return array;
-        }
-
-        private static unsafe int[] Copy(int* src, int len)
-        {
-            var array = new int[len];
-            Marshal.Copy((IntPtr)src, array, 0, len);
-            return array;
-        }
-
+        
         #region Properties
 
         /// <summary>
@@ -238,6 +224,24 @@ namespace LibSvmDotNet
             base.DisposeUnmanaged();
             NativeMethods.svm_free_model_content(this.NativePtr);
             NativeMethods.free(this.NativePtr);
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private static unsafe double[] Copy(double* src, int len)
+        {
+            var array = new double[len];
+            Marshal.Copy((IntPtr)src, array, 0, len);
+            return array;
+        }
+
+        private static unsafe int[] Copy(int* src, int len)
+        {
+            var array = new int[len];
+            Marshal.Copy((IntPtr)src, array, 0, len);
+            return array;
         }
 
         #endregion
