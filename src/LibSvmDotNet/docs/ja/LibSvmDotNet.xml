@@ -85,7 +85,7 @@
             <summary>
             string パラメータを持ち、値を返されないメソッドをカプセル化します。
             </summary>
-            <param name="message"></param>
+            <param name="message">LIBSVM から渡されるメッセージ。</param>
         </member>
         <member name="M:LibSvmDotNet.LibSvm.CheckParameter(LibSvmDotNet.Problem,LibSvmDotNet.Parameter)">
             <summary>
@@ -130,14 +130,15 @@
         </member>
         <member name="M:LibSvmDotNet.LibSvm.PredictValues(LibSvmDotNet.Model,LibSvmDotNet.NodeArray,System.Double[]@)">
             <summary>
-            あるモデルを与えられたテスト ベクトルに対する予測値を与え、予測ラベル (分類) または関数値 (回帰) を返します。
+            あるモデルを与えられたテスト ベクトルに対する決定値を与え、予測ラベル (分類) または関数値 (回帰) を返します。
             </summary>
             <param name="model"><see cref="T:LibSvmDotNet.Model"/>。</param>
             <param name="x">テスト ベクトル。</param>
-            <param name="probability">メソッドから戻るとき、成功すると予測値を含め、 失敗すると null を返します。</param>
+            <param name="probability">メソッドから戻るとき、成功すると決定値を含め、 失敗すると null を返します。</param>
             <returns>
-            <para>分類モデルでは、x に対する予測クラスと予測値を返します。</para>
-            <para>回帰モデルでは、<code>decisionValues[0]</code> と戻り値は、モデルを使用して計算された x の関数値です。1 クラス モデルでは、<code>decisionValues[0]</code> は x の予測値であり、+1 または -1 を返します。</para>
+            <para>分類モデルでは、x に対する予測クラスと決定値を返します。</para>
+            <para>回帰モデルでは、<code>decisionValues[0]</code> と戻り値は、モデルを使用して計算された x の関数値です。</para>
+            <para>1 クラス モデルでは、<code>decisionValues[0]</code> は x の決定値であり、+1 または -1 を返します。</para>
             </returns>
         </member>
         <member name="M:LibSvmDotNet.LibSvm.SetPrintFunction(LibSvmDotNet.LibSvm.PrintFunc)">
@@ -319,8 +320,8 @@
             <summary>
             指定したインデックスにある要素を取得します。
             </summary>
-            <param name="index"></param>
-            <returns>取得する要素のインデックス。</returns>
+            <param name="index">取得する要素のインデックス。</param>
+            <returns>指定したインデックス位置にある要素。</returns>
         </member>
         <member name="M:LibSvmDotNet.NodeArray.GetEnumerator">
             <summary>
@@ -349,8 +350,8 @@
             <summary>
             指定したインデックスの要素を取得します。
             </summary>
-            <param name="index"></param>
-            <returns>取得する要素のインデックス。</returns>
+            <param name="index">取得する要素のインデックス。</param>
+            <returns>指定したインデックス位置にある要素。</returns>
         </member>
         <member name="T:LibSvmDotNet.Parameter">
             <summary>

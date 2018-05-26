@@ -16,7 +16,7 @@ namespace LibSvmDotNet
         /// <summary>
         /// Encapsulates a method that has a string parameter and does not return a value.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The message given from LIBSVM.</param>
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void PrintFunc(string message);
 
@@ -47,7 +47,18 @@ namespace LibSvmDotNet
 
             unsafe
             {
-                var param = parameter.ToNative();
+                var param = new NativeMethods.svm_parameter();
+
+                try
+                {
+                    // This method throw exception when there is some errors.
+                    // This error check is not official's.
+                    param = parameter.ToNative();
+                }
+                catch (LibSvmException lle)
+                {
+                    return lle.Message;
+                }
 
                 try
                 {
@@ -155,7 +166,8 @@ namespace LibSvmDotNet
         /// <param name="decisionValues">When this method returns, contains decision values if succeeded, or null if failed.</param>
         /// <returns>
         /// <para>For a classification model, the predicted class for x and decision values.</para>
-        /// <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
+        /// <para>For a regression model, <code>decisionValues[0]</code> and the returned value are both the function value of x calculated using the model. </para>
+        /// <para>For a one-class model, <code>decisionValues[0]</code> is the decision value of x, while the returned value is +1/-1.</para>
         /// </returns>
         public static double PredictValues(Model model, NodeArray x, out double[] decisionValues)
         {
@@ -279,13 +291,41 @@ namespace LibSvmDotNet
 
             if (ret.nr_weight > 0)
             {
-                ret.weight_label = (int*)NativeMethods.malloc(sizeof(int), ret.nr_weight);
-                fixed (int* p = &parameter.WeightLabel[0])
-                    NativeMethods.memcpy(ret.weight_label, p, ret.nr_weight * sizeof(int));
+                if (parameter.WeightLabel == null)
+                    throw new LibSvmException("Parameter.WeightLabel is null although Parameter.LengthOfWeight is over 0.");
+                if (parameter.Weight == null)
+                    throw new LibSvmException("Parameter.Weight is null although Parameter.LengthOfWeight is over 0.");
 
-                ret.weight = (double*)NativeMethods.malloc(sizeof(double), ret.nr_weight);
-                fixed (double* p = &parameter.Weight[0])
-                    NativeMethods.memcpy(ret.weight, p, ret.nr_weight * sizeof(double));
+                var len1 = parameter.WeightLabel.Length;
+                var len2 = parameter.Weight.Length;
+                if(len1 != ret.nr_weight || len2 != ret.nr_weight)
+                    throw new LibSvmException("Parameter.WeightLabel.Length does not match Parameter.Weight.Length");
+            }
+
+            var failAlloc = false;
+
+            try
+            {
+                if (ret.nr_weight > 0)
+                {
+                    ret.weight_label = (int*)NativeMethods.malloc(sizeof(int), ret.nr_weight);
+                    fixed (int* p = &parameter.WeightLabel[0])
+                        NativeMethods.memcpy(ret.weight_label, p, ret.nr_weight * sizeof(int));
+
+                    ret.weight = (double*)NativeMethods.malloc(sizeof(double), ret.nr_weight);
+                    fixed (double* p = &parameter.Weight[0])
+                        NativeMethods.memcpy(ret.weight, p, ret.nr_weight * sizeof(double));
+                }
+
+                failAlloc = true;
+            }
+            finally
+            {
+                if (!failAlloc)
+                {
+                    NativeMethods.free((IntPtr)ret.weight_label);
+                    NativeMethods.free((IntPtr)ret.weight);
+                }
             }
 
             return ret;
@@ -294,7 +334,7 @@ namespace LibSvmDotNet
         internal static unsafe NativeMethods.svm_node* ToNative(this Node[] node)
         {
             var len = node.Length;
-            var ptr = (NativeMethods.svm_node*)Marshal.AllocCoTaskMem(sizeof(NativeMethods.svm_node) * (node.Length + 1));
+            var ptr = (NativeMethods.svm_node*)NativeMethods.malloc(sizeof(NativeMethods.svm_node), (node.Length + 1));
             fixed (Node* pX = &node[0])
             {
                 for (var j = 0; j < len; j++)

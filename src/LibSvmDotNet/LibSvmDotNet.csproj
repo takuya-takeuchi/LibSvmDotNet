@@ -6,7 +6,7 @@
     <Authors>Takuya Takeuchi</Authors>
     <Description>.NET wrapper for LIBSVM written in C#</Description>
     <copyright>Copyright Takuya Takeuchi 2018</copyright>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>LibSvmDotNet</PackageId>
     <Product>LibSvm.Net</Product>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
