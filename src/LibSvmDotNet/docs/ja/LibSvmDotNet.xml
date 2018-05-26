@@ -476,6 +476,16 @@
             <exception cref="T:System.IO.FileNotFoundException">指定したファイルが存在しません。</exception>
             <exception cref="T:System.FormatException">指定したファイルは不正なフォーマットです。</exception>
         </member>
+        <member name="M:LibSvmDotNet.Problem.FromSequence(System.Collections.Generic.IList{LibSvmDotNet.Node[]},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            指定したノードとラベルから新しい <see cref="T:LibSvmDotNet.Problem"/> を生成します。
+            </summary>
+            <param name="nodes">ノード。</param>
+            <param name="labels">ラベル。</param>
+            <returns>このメソッドは指定したノードとラベルに対する新しい <see cref="T:LibSvmDotNet.Problem"/> を返します。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="nodes"/> が null、または <paramref name="labels"/> が nullです。</exception>
+            <exception cref="T:System.ArgumentException">ノードの数とラベルの数が一致しません。</exception>
+        </member>
         <member name="M:LibSvmDotNet.Problem.DisposeUnmanaged">
             <summary>
             アンマネージ リソースを解放します。
