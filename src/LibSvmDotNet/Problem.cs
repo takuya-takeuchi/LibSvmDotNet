@@ -171,6 +171,27 @@ namespace LibSvmDotNet
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="Problem"/> from the specified nodes and labels.
+        /// </summary>
+        /// <param name="nodes">The nodes.</param>
+        /// <param name="labels">The labels.</param>
+        /// <returns>This method returns a new <see cref="Problem"/> for the specified nodes and labels.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="nodes"/> is null or <paramref name="labels"/> is null.</exception>
+        /// <exception cref="ArgumentException">Number of nodes and numbr of labels are not the same.</exception>
+        public static Problem FromSequence(IList<Node[]> nodes, IEnumerable<double> labels)
+        {
+            if (nodes == null)
+                throw new ArgumentNullException(nameof(nodes));
+            if (labels == null)
+                throw new ArgumentNullException(nameof(labels));
+
+            if (nodes.Count != labels.Count())
+                throw new ArgumentException("Number of nodes and numbr of labels are not the same.");
+
+            return new Problem(nodes, labels.ToArray());
+        }
+
         #region Overrides
 
         /// <summary>

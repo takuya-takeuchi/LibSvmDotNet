@@ -476,6 +476,16 @@
             <exception cref="T:System.IO.FileNotFoundException">The specified file is not found.</exception>
             <exception cref="T:System.FormatException">The specified file is invalid format.</exception>
         </member>
+        <member name="M:LibSvmDotNet.Problem.FromSequence(System.Collections.Generic.IList{LibSvmDotNet.Node[]},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Creates a new <see cref="T:LibSvmDotNet.Problem"/> from the specified nodes and labels.
+            </summary>
+            <param name="nodes">The nodes.</param>
+            <param name="labels">The labels.</param>
+            <returns>This method returns a new <see cref="T:LibSvmDotNet.Problem"/> for the specified nodes and labels.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="nodes"/> is null or <paramref name="labels"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Number of nodes and numbr of labels are not the same.</exception>
+        </member>
         <member name="M:LibSvmDotNet.Problem.DisposeUnmanaged">
             <summary>
             Releases all unmanaged resources.

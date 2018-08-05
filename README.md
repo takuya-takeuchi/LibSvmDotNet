@@ -1,4 +1,4 @@
-# LibSvm.Net
+# ![Alt text](nuget/svm48.png "LibSvm.Net") LibSvm.Net
  
 .NET wrapper for LIBSVM written in C#  
 LibSvm.Net works on Windows and Linux!!
