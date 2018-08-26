@@ -1,11 +1,9 @@
-# ![Alt text](nuget/svm48.png "LibSvm.Net") LibSvm.Net [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+# ![Alt text](nuget/svm48.png "LibSvm.Net") LibSvm.Net
  
 .NET wrapper for LIBSVM written in C#  
 LibSvm.Net works on Windows and Linux!!
 
-|Package|NuGet|
-|---|---|
-|LibSvmDotNet|[![NuGet version](https://img.shields.io/nuget/v/LibSvmDotNet.svg)](https://www.nuget.org/packages/LibSvmDotNet)|
+[![NuGet version](https://badge.fury.io/nu/LibSvmDotNet.svg)](https://badge.fury.io/nu/LibSvmDotNet)
 
 ## Usage
 
