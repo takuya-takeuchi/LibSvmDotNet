@@ -40,7 +40,8 @@ namespace LibSvmDotNet
                     this.SupportVectorCoefficients[index] = Copy(model->sv_coef[index], this.L);
             }
 
-            this.SupportVectorIndices = Copy(model->sv_indices, this.L);
+            if (model->sv_indices != null)
+                this.SupportVectorIndices = Copy(model->sv_indices, this.L);
 
             var length = (this.Classes - 1) * this.Classes / 2;
             this.Rho = Copy(model->rho, length);
