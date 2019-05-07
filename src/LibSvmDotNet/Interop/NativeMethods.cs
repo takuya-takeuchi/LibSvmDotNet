@@ -19,7 +19,7 @@ namespace LibSvmDotNet.Interop
 #else
         public const string CLibrary = "msvcrt.dll";
 
-        public const string NativeLibrary = "libsvm.dll";
+        public const string NativeLibrary = @"x64\libsvm.dll";
 
         public const CallingConvention CallingConvention = System.Runtime.InteropServices.CallingConvention.Cdecl;
 #endif
