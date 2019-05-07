@@ -6,12 +6,13 @@
     <Authors>Takuya Takeuchi</Authors>
     <Description>.NET wrapper for LIBSVM written in C#</Description>
     <copyright>Copyright Takuya Takeuchi 2018</copyright>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageId>LibSvmDotNet</PackageId>
     <Product>LibSvm.Net</Product>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <Configurations>Debug;Release</Configurations>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -48,4 +49,17 @@
     <DefineConstants>$(DefineConstants);netstandard20</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\native\libsvm.dll" Pack="true" PackagePath="build\x64">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>x64\libsvm.dll</Link>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="LibSvmDotNet.targets" Pack="true" PackagePath="build">
+      <Visible>false</Visible>
+    </None>
+  </ItemGroup>
+  
 </Project>
